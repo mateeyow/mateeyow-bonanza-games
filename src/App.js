@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import fetch from 'axios'
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import './app.scss'
 
 function App() {
+  const [images, setImages] = useState([])
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const { data } = await fetch.get('https://picsum.photos/v2/list')
+        setImages(data.slice(0, 11))
+      } catch (err) {
+        console.error(`Error fetching images: ${err}`)
+      }
+    }
+
+    fetchImages()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <main className='container main-grid'>
+        {images.map((record) =>
+          <div key={record.id}>
+            <img src={record.download_url} alt='cat' />
+          </div>
+        )}
+      </main>
+      <Footer />
     </div>
   );
 }

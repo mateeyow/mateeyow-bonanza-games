@@ -1,0 +1,32 @@
+footer.footer {
+  background-color: var(--secondary);
+
+  & > * {
+    color: white;
+  }
+}
+
+.footer-items {
+  display: flex;
+  padding: 2rem 2rem 5rem;
+
+  & > * {
+    margin-right: 5rem;
+  }
+}
+
+.footer-links {
+  list-style: none;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 1280px) {
+  .footer-items {
+    padding-left: 0;
+  }
+
+  .footer-links {
+    list-style: none;
+    font-size: 0.75rem;
+  }
+}
